@@ -1,4 +1,4 @@
-package com.neilmao;
+package com.neilmao.iphone6;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -11,9 +11,7 @@ import java.util.Map;
  */
 public class Model {
 
-    private Store store;
-
-    private String model;
+    private String code;
     private boolean available;
     private String name;
     private boolean important;
@@ -24,14 +22,14 @@ public class Model {
         this.important = false;
     }
 
-    public Model(String model, String name) {
+    public Model(String code, String name) {
         this();
-        this.model = model;
+        this.code = code;
         this.name = name;
     }
 
-    public Model(String model, String name, boolean important) {
-        this(model, name);
+    public Model(String code, String name, boolean important) {
+        this(code, name);
         this.important = important;
     }
 
@@ -68,12 +66,12 @@ public class Model {
     }
 
 
-    public String getModel() {
-        return model;
+    public String getCode() {
+        return code;
     }
 
-    public void setModel(String model) {
-        this.model = model;
+    public void setCode(String code) {
+        this.code = code;
     }
 
     public boolean isAvailable() {
@@ -98,13 +96,5 @@ public class Model {
 
     public void setImportant(boolean important) {
         this.important = important;
-    }
-
-    public Store getStore() {
-        return store;
-    }
-
-    public void setStore(Store store) {
-        this.store = store;
     }
 }

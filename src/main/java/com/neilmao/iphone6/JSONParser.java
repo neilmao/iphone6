@@ -1,4 +1,4 @@
-package com.neilmao;
+package com.neilmao.iphone6;
 
 
 import org.codehaus.jackson.JsonNode;
@@ -16,14 +16,9 @@ import java.util.*;
  */
 public class JSONParser
 {
-
-    private Map<String, Model> models;
-
     private Map<String, Store> stores;
 
-
     public JSONParser() {
-       models = Model.prepareModels();
     }
 
     public void parseStores(InputStream inputStream) throws IOException {
@@ -51,7 +46,7 @@ public class JSONParser
     }
 
 
-    public Map<String, Model> parseAvailability(InputStream inputStream) throws IOException {
+    public Map<String, Store> parseAvailability(InputStream inputStream) throws IOException {
 
         ObjectMapper mapper = new ObjectMapper();
 
@@ -63,16 +58,19 @@ public class JSONParser
 
             JsonNode node = rootNode.path(storeKey);
 
+            Store store = stores.get(storeKey);
+            Map<String, Model> models = Model.prepareModels();
+
             Iterator<Map.Entry<String,JsonNode>> iterator = node.getFields();
 
             while (iterator.hasNext()) {
                 Map.Entry<String, JsonNode> entry = iterator.next();
                 Model model = models.get(entry.getKey());
                 model.setAvailable(entry.getValue().getBooleanValue());
-                model.setStore(stores.get(storeKey));
+                store.getModelList().add(model);
             }
         }
 
-        return models;
+        return stores;
     }
 }

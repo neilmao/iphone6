@@ -276,7 +276,7 @@
         "MG4C2X/A" : false,
         "MGAA2X/A" : false,
         "MG4H2X/A" : false,
-        "MG492X/A" : false,
+        "MG492X/A" : true,
         "MGAC2X/A" : false
     },
     "R385" : {
