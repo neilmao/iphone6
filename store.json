@@ -1,0 +1,89 @@
+" : [ {
+    "storeNumber" : "R254",
+    "storeName" : "Bondi",
+    "storeEnabled" : true
+  }, {
+    "storeNumber" : "R466",
+    "storeName" : "Brisbane",
+    "storeEnabled" : true
+  }, {
+    "storeNumber" : "R523",
+    "storeName" : "Broadway",
+    "storeEnabled" : true
+  }, {
+    "storeNumber" : "R483",
+    "storeName" : "Canberra",
+    "storeEnabled" : true
+  }, {
+    "storeNumber" : "R509",
+    "storeName" : "Carindale",
+    "storeEnabled" : true
+  }, {
+    "storeNumber" : "R344",
+    "storeName" : "Castle Towers",
+    "storeEnabled" : true
+  }, {
+    "storeNumber" : "R180",
+    "storeName" : "Chadstone",
+    "storeEnabled" : true
+  }, {
+    "storeNumber" : "R385",
+    "storeName" : "Charlestown",
+    "storeEnabled" : true
+  }, {
+    "storeNumber" : "R253",
+    "storeName" : "Chatswood Chase",
+    "storeEnabled" : true
+  }, {
+    "storeNumber" : "R384",
+    "storeName" : "Chermside",
+    "storeEnabled" : true
+  }, {
+    "storeNumber" : "R342",
+    "storeName" : "Doncaster",
+    "storeEnabled" : true
+  }, {
+    "storeNumber" : "R530",
+    "storeName" : "Fountain Gate",
+    "storeEnabled" : true
+  }, {
+    "storeNumber" : "R508",
+    "storeName" : "Garden City Perth",
+    "storeEnabled" : true
+  }, {
+    "storeNumber" : "R504",
+    "storeName" : "Highpoint",
+    "storeEnabled" : true
+  }, {
+    "storeNumber" : "R458",
+    "storeName" : "Hornsby",
+    "storeEnabled" : true
+  }, {
+    "storeNumber" : "R440",
+    "storeName" : "Penrith",
+    "storeEnabled" : true
+  }, {
+    "storeNumber" : "R386",
+    "storeName" : "Perth City",
+    "storeEnabled" : true
+  }, {
+    "storeNumber" : "R351",
+    "storeName" : "Robina",
+    "storeEnabled" : true
+  }, {
+    "storeNumber" : "R405",
+    "storeName" : "Rundle Place",
+    "storeEnabled" : true
+  }, {
+    "storeNumber" : "R343",
+    "storeName" : "Southland",
+    "storeEnabled" : true
+  }, {
+    "storeNumber" : "R238",
+    "storeName" : "Sydney",
+    "storeEnabled" : true
+  } ],
+  "timezone" : "EST",
+  "updatedDate" : "Monday, 29 September",
+  "reservationURL" : "https://reserve-au.apple.com/AU/en_AU/reserve/iPhone"
+}

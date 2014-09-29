@@ -1,0 +1,3 @@
+https://reserve.cdn-apple.com/AU/en_AU/reserve/iPhone/availability.json
+
+https://reserve.cdn-apple.com/AU/en_AU/reserve/iPhone/stores.json
