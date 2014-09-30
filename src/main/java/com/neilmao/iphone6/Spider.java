@@ -14,9 +14,7 @@ import org.apache.http.protocol.BasicHttpContext;
 import org.apache.http.protocol.HttpContext;
 
 import java.io.*;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created with IntelliJ IDEA.
@@ -40,7 +38,7 @@ public class Spider {
         this.logFile = logFile;
     }
 
-    public void getAvailability(boolean importantOnly) throws InterruptedException, IOException {
+    public void getAvailability(boolean importantOnly, boolean sydneyOnly) throws InterruptedException, IOException {
 
         PrintWriter writer = new PrintWriter(this.logFile, "UTF-8");
 
@@ -69,30 +67,40 @@ public class Spider {
 
                 Map<String, Store> storeMap = parser.parseAvailability(inputStream);
 
+                Set<String> sydneyStoreKeySet = new HashSet<String>();
+                sydneyStoreKeySet.add("R238");
+                sydneyStoreKeySet.add("R523");
+                sydneyStoreKeySet.add("R254");
+                sydneyStoreKeySet.add("R253");
+                sydneyStoreKeySet.add("R458");
+                sydneyStoreKeySet.add("R440");
+
                 StringBuilder sb = new StringBuilder();
 
                 Date date = new Date();
 
                 sb.append("========================\n");
-                sb.append("TimeStamp: " + date + "\n");
+                sb.append("TimeStamp: " + date + " Important Only:" + importantOnly + " Sydney Only:" + sydneyOnly + "\n");
 
                 for (Store store : storeMap.values()) {
-                    if (store.isEnabled()) {
-                        store.checkStock();
-                        if (store.isHasStock()) {
-                            if (!importantOnly || store.isHasImportantStock()) {
-                                sb.append("Store: " + store.getName() + "\n");
-                                List<Model> models = store.getModelList();
-                                for (Model model : models) {
-                                    if (model.isAvailable()) {
-                                        if (model.isImportant()) {
-                                            sb.append("[*] ");
+                    if (!sydneyOnly || sydneyStoreKeySet.contains(store.getCode())) {
+                        if (store.isEnabled()) {
+                            store.checkStock();
+                            if (store.isHasStock()) {
+                                if (!importantOnly || store.isHasImportantStock()) {
+                                    sb.append("Store: " + store.getName() + "\n");
+                                    List<Model> models = store.getModelList();
+                                    for (Model model : models) {
+                                        if (model.isAvailable()) {
+                                            if (model.isImportant()) {
+                                                sb.append("[*] ");
+                                            }
+                                            if (!importantOnly || model.isImportant())
+                                                sb.append(model.getName() + "\n");
                                         }
-                                        if (!importantOnly || model.isImportant())
-                                            sb.append(model.getName() + "\n");
                                     }
+                                    sb.append("------------------------\n");
                                 }
-                                sb.append("------------------------\n");
                             }
                         }
                     }

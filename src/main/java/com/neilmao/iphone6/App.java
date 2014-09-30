@@ -12,9 +12,23 @@ public class App {
 
         String logFile = "log.txt";
 
-        if (args.length > 0)
+        boolean importantOnly = false;
+        boolean sydneyOnly = false;
+
+        if (args.length > 0) {
             logFile = args[0];
 
-        new Spider(logFile).getAvailability(args.length > 1);
+            for (int i=1; i<args.length; ++i) {
+                if (args[i].equals("i")) {
+                    importantOnly = true;
+                    continue;
+                }
+                if (args[i].equals("s")) {
+                    sydneyOnly = true;
+                }
+            }
+        }
+
+        new Spider(logFile).getAvailability(importantOnly, sydneyOnly);
     }
 }
