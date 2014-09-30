@@ -1,7 +1,7 @@
 iphone6
 =======
 
-This is a widget to monitor the stock availability of Apple Store Au which is refreshing daily after midnight.
+This is a widget to monitor the iPhone 6 & plus stock availability in Apple Store Au which is refreshing daily after midnight.
 
 The "Important Only" option indicates to monitor iphone 6 plus all colours and iphone 6 gold stocks only.
 
