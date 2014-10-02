@@ -33,9 +33,11 @@ public class Spider {
     private static final String STORE_URL = "https://reserve.cdn-apple.com/AU/en_AU/reserve/iPhone/stores.json";
 
     private String logFile;
+    private long period;
 
-    public Spider(String logFile) {
+    public Spider(String logFile, long period) {
         this.logFile = logFile;
+        this.period = period;
     }
 
     public void getAvailability(boolean importantOnly, boolean sydneyOnly) throws InterruptedException, IOException {
@@ -67,6 +69,11 @@ public class Spider {
 
                 Map<String, Store> storeMap = parser.parseAvailability(inputStream);
 
+                List<Store> storeList = new LinkedList<Store>(storeMap.values());
+
+                Collections.sort(storeList);
+
+                // prepare Sydney Apple stores code here, hardcoded
                 Set<String> sydneyStoreKeySet = new HashSet<String>();
                 sydneyStoreKeySet.add("R238");
                 sydneyStoreKeySet.add("R523");
@@ -75,48 +82,78 @@ public class Spider {
                 sydneyStoreKeySet.add("R458");
                 sydneyStoreKeySet.add("R440");
 
-                StringBuilder sb = new StringBuilder();
+                StringBuilder sbConsole = new StringBuilder();
+                StringBuilder sbLog = new StringBuilder();
 
                 Date date = new Date();
 
-                sb.append("========================\n");
-                sb.append("TimeStamp: " + date + " Important Only:" + importantOnly + " Sydney Only:" + sydneyOnly + "\n");
+                // log to console
+                sbConsole.append("========================\n");
+                sbConsole.append("TimeStamp: " + date + " [Important Only:" + importantOnly + "] [Sydney Only:" + sydneyOnly + "]\n");
 
-                for (Store store : storeMap.values()) {
+                for (Store store : storeList) {
                     if (!sydneyOnly || sydneyStoreKeySet.contains(store.getCode())) {
                         if (store.isEnabled()) {
                             store.checkStock();
                             if (store.isHasStock()) {
                                 if (!importantOnly || store.isHasImportantStock()) {
-                                    sb.append("Store: " + store.getName() + "\n");
+                                    sbConsole.append("Store: " + store.getName() + "\n");
                                     List<Model> models = store.getModelList();
+                                    Collections.sort(models);
                                     for (Model model : models) {
                                         if (model.isAvailable()) {
                                             if (model.isImportant()) {
-                                                sb.append("[*] ");
+                                                sbConsole.append("[*] ");
                                             }
                                             if (!importantOnly || model.isImportant())
-                                                sb.append(model.getName() + "\n");
+                                                sbConsole.append(model.getName() + "\n");
                                         }
                                     }
-                                    sb.append("------------------------\n");
+                                    sbConsole.append("------------------------\n");
                                 }
                             }
                         }
                     }
                 }
 
-                sb.append("========================\n");
+                sbConsole.append("========================\n");
 
-                LOG.info(sb.toString());
+                LOG.info(sbConsole.toString());
 
-                writer.println(sb.toString());
+                // log to log file
+                sbLog.append("========================\n");
+                sbLog.append("TimeStamp: " + date + " [Important Only:" + importantOnly + "] [Sydney Only:" + sydneyOnly + "]\n");
+
+                for (Store store : storeList) {
+                    if (store.isEnabled()) {
+                        store.checkStock();
+                        if (store.isHasStock()) {
+                            sbLog.append("Store: " + store.getName() + "\n");
+                            List<Model> models = store.getModelList();
+                            Collections.sort(models);
+                            for (Model model : models) {
+                                if (model.isAvailable()) {
+                                    if (model.isImportant()) {
+                                        sbLog.append("[*] ");
+                                    }
+                                    sbLog.append(model.getName() + "\n");
+                                }
+                            }
+                            sbLog.append("------------------------\n");
+                        }
+
+                    }
+                }
+
+                sbLog.append("========================\n");
+
+                writer.println(sbLog.toString());
                 writer.flush();
 
             } catch (IOException e) {
                 LOG.error("Getting availability failed." + e.toString());
             }
-            Thread.sleep(100L);
+            Thread.sleep(this.period);
         } while (true);
     }
 

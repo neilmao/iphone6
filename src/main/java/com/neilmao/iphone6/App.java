@@ -1,5 +1,9 @@
 package com.neilmao.iphone6;
 
+import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 /**
  * Created with IntelliJ IDEA.
  * User: neil
@@ -8,27 +12,74 @@ package com.neilmao.iphone6;
  */
 public class App {
 
-    public static void main(String[] args) throws Exception {
+    private static final String LOG_FOLDER = "log/";
 
-        String logFile = "log.txt";
+    // time window between two checks in ms
+    private static long PERIOD = 100;
+
+    public static void main(String[] args) throws Exception {
 
         boolean importantOnly = false;
         boolean sydneyOnly = false;
 
-        if (args.length > 0) {
-            logFile = args[0];
+        SimpleDateFormat smf = new SimpleDateFormat("MMdd-HHmmss-SSS");
 
-            for (int i=1; i<args.length; ++i) {
-                if (args[i].equals("i")) {
-                    importantOnly = true;
-                    continue;
-                }
-                if (args[i].equals("s")) {
-                    sydneyOnly = true;
-                }
+        File logFolder = new File(LOG_FOLDER);
+        if (!logFolder.exists() || !logFolder.isDirectory()) {
+            logFolder.mkdir();
+        }
+
+        String logFile = LOG_FOLDER + smf.format(new Date()) + ".log";
+
+        for (int i=0; i<args.length; ++i) {
+            if (args[i].equals("-i")) {
+                importantOnly = true;
+                continue;
+            }
+            if (args[i].equals("-s")) {
+                sydneyOnly = true;
+                continue;
+            }
+            if (args[i].equals("-p") && i + 1 < args.length) {
+               PERIOD = extractTime(args[++i]);
             }
         }
 
-        new Spider(logFile).getAvailability(importantOnly, sydneyOnly);
+        new Spider(logFile, PERIOD).getAvailability(importantOnly, sydneyOnly);
+    }
+
+    private static long extractTime(String time) {
+
+        String number = "";
+        String unit = "";
+
+        long value;
+
+        for (int i=0; i<time.length(); ++i) {
+            if (time.charAt(i) >= '0' && time.charAt(i) <= '9') {
+               number += time.charAt(i);
+            } else {
+               unit = time.substring(i);
+            }
+        }
+
+        try {
+            value = Long.parseLong(number);
+
+            if (unit.equals("H") || unit.equals("h")) {
+                PERIOD = value * 60 * 60 * 1000;
+            }
+
+            if (unit.equals("M") || unit.equals("m")) {
+                PERIOD = value * 60 * 1000;
+            }
+
+            if (unit.equals("S") || unit.equals("s")) {
+                PERIOD = value * 1000;
+            }
+
+        } catch (Exception e) {}
+
+        return PERIOD;
     }
 }

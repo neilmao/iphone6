@@ -21,7 +21,7 @@ public class JSONParser
     public JSONParser() {
     }
 
-    public void parseStores(InputStream inputStream) throws IOException {
+    public Map<String, Store> parseStores(InputStream inputStream) throws IOException {
 
         stores = new LinkedHashMap<String, Store>();
 
@@ -43,6 +43,21 @@ public class JSONParser
 
             stores.put(code, new Store(name, code, enabled));
         }
+
+        if (stores.get("R238") != null)
+            stores.get("R238").setPriority(1);
+        if (stores.get("R523") != null)
+            stores.get("R523").setPriority(2);
+        if (stores.get("R254") != null)
+            stores.get("R254").setPriority(3);
+        if (stores.get("R253") != null)
+            stores.get("R253").setPriority(4);
+        if (stores.get("R458") != null)
+            stores.get("R458").setPriority(5);
+        if (stores.get("R440") != null)
+            stores.get("R440").setPriority(5);
+
+        return stores;
     }
 
 

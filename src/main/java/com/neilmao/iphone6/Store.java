@@ -10,13 +10,14 @@ import java.util.List;
  * Date: 29/09/14
  * Time: 4:31 PM
  */
-public class Store {
+public class Store implements Comparable<Store> {
 
     private String name;
     private String code;
     private boolean enabled;
     private boolean hasStock;
     private boolean hasImportantStock;
+    private int priority;
 
     private List<Model> modelList;
 
@@ -29,6 +30,7 @@ public class Store {
         this.hasStock = false;
         this.hasImportantStock = false;
         this.modelList = new LinkedList<Model>();
+        this.priority = 255;
     }
 
     public void checkStock() {
@@ -41,6 +43,11 @@ public class Store {
                 }
             }
         }
+    }
+
+    @Override
+    public int compareTo(Store o) {
+        return this.priority - o.priority;
     }
 
     public String getName() {
@@ -89,6 +96,14 @@ public class Store {
 
     public void setHasStock(boolean hasStock) {
         this.hasStock = hasStock;
+    }
+
+    public int getPriority() {
+        return priority;
+    }
+
+    public void setPriority(int priority) {
+        this.priority = priority;
     }
 
     public static String getUPDATED_TIME() {
