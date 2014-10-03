@@ -53,8 +53,8 @@ public class Model implements Comparable<Model> {
 
         // add iphone 6
         models.put("MG492X/A", new Model("MG492X/A", "Gold 16GB", false, 12));
-        models.put("MG4J2X/A", new Model("MG4J2X/A", "Gold 64GB", true, 10));
-        models.put("MG4E2X/A", new Model("MG4E2X/A", "Gold 128GB", true, 11));
+        models.put("MG4J2X/A", new Model("MG4J2X/A", "Gold 64GB", false, 10));
+        models.put("MG4E2X/A", new Model("MG4E2X/A", "Gold 128GB", false, 11));
 
         models.put("MG472X/A", new Model("MG472X/A", "Grey 16GB", false, 18));
         models.put("MG4F2X/A", new Model("MG4F2X/A", "Grey 64GB", false, 14));

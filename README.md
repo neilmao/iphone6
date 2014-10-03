@@ -11,7 +11,7 @@ To compile and run:
 
 mvn assembly:assembly -DdescriptorId=jar-with-dependencies
 
-java -jar iphone6.jar [logFileName] [importantOnly] [sydneyOnly]
+java -jar iphone6.jar <-i>[importantOnly] <-s>[sydneyOnly] <-t> <h|H|m|M|s|S[number]>[time]
 
 e.g:
-java -jar target/iphone6-1.0-SNAPSHOT-jar-with-dependencies.jar log.txt i s
+java -jar target/iphone6-1.0-SNAPSHOT-jar-with-dependencies.jar -i -s -t 1m

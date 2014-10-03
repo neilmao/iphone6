@@ -40,7 +40,7 @@ public class App {
                 sydneyOnly = true;
                 continue;
             }
-            if (args[i].equals("-p") && i + 1 < args.length) {
+            if (args[i].equals("-t") && i + 1 < args.length) {
                PERIOD = extractTime(args[++i]);
             }
         }
