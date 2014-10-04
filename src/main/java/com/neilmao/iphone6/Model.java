@@ -39,16 +39,16 @@ public class Model implements Comparable<Model> {
         Map<String, Model> models = new LinkedHashMap();
 
         // add iphone 6 plus
-        models.put("MGAA2X/A", new Model("MGAA2X/A", "Plus Gold 16GB", true, 7));
+        models.put("MGAA2X/A", new Model("MGAA2X/A", "Plus Gold 16GB", false, 7));
         models.put("MGAK2X/A", new Model("MGAK2X/A", "Plus Gold 64GB", true, 1));
-        models.put("MGAF2X/A", new Model("MGAF2X/A", "Plus Gold 128GB", true, 2));
+        models.put("MGAF2X/A", new Model("MGAF2X/A", "Plus Gold 128GB", true, 4));
 
-        models.put("MGA92X/A", new Model("MGA92X/A", "Plus Silver 16GB", true, 8));
-        models.put("MGAJ2X/A", new Model("MGAJ2X/A", "Plus Silver 64GB", true, 3));
+        models.put("MGA92X/A", new Model("MGA92X/A", "Plus Silver 16GB", false, 8));
+        models.put("MGAJ2X/A", new Model("MGAJ2X/A", "Plus Silver 64GB", true, 2));
         models.put("MGAE2X/A", new Model("MGAE2X/A", "Plus Silver 128GB", true, 5));
 
-        models.put("MGA82X/A", new Model("MGA82X/A", "Plus Grey 16GB", true, 9));
-        models.put("MGAH2X/A", new Model("MGAH2X/A", "Plus Grey 64GB", true, 4));
+        models.put("MGA82X/A", new Model("MGA82X/A", "Plus Grey 16GB", false, 9));
+        models.put("MGAH2X/A", new Model("MGAH2X/A", "Plus Grey 64GB", true, 3));
         models.put("MGAC2X/A", new Model("MGAC2X/A", "Plus Grey 128GB", true, 6));
 
         // add iphone 6
